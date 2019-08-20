@@ -8,4 +8,4 @@
 #### 02.一次编译到处运行怎么实现呢？
 #### LICSLAN回答: 
      一次编译到处运行看下图
-     ![JVM00](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM00.jpg)
+![JVM00](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM00.jpg)
