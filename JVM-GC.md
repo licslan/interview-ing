@@ -24,4 +24,5 @@
      C.兼容性 也可以将别的语言解析成字节码 如Grovey scala等 这符合软件设计的中庸之道
 #### 04.JVM如何加载.class文件？
 #### LICSLAN回答: 
-          
+     TODO
+![JVM01](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM01.jpg)     
