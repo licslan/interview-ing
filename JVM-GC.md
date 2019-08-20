@@ -29,4 +29,12 @@
      一般情况我们不需要知道jvm运行原理只需要专注写Java代码即可 这也是虚拟机存在的原因就是屏蔽底层操作系统平台的不同并且减少
      基于原生语言开发的复杂度只需要虚拟机厂商在特定的操作系统上实现虚拟机定义了如何将字节码解析成操作系统可执行的二进制码即可
      JVM 内存模型 和 gc回收机制需要重点学习  知道程序如何调优 JVM 是一个内存中的虚拟机 也就意味其存储就是内存！！！
+     我们在代码中所写的类 常量 变量 方法都在内存中 其决定着我们程序运行是否健壮是否高效
+     [classLoader]  [Runtime Data Area]  [Execution Engine]  [Native Interface]
+     class Loader:依据特定格式 加载class文件到内存
+     Execution Engine ：对命令进行解析
+     Native Interface:融合不同开发语言的原生库为Java使用  Java执行性能并没有c c++高
+     在一些执行性能较高的操作需要调用其他语言的原生库 比如c++ 就要使用Native Interface来调用 而不重复造轮子
+     在Native Method Stack中登记Native方法 在Execution Engine执行时加载Native库如Class.forName(),forName0()是Native方法
+     Runtime Data Area:JVM内存空间结构模型 我们所写的程序最后都会被加载到这里之后才开始运行
 ![JVM01](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM01.jpg)     
