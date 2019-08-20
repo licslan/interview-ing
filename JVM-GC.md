@@ -12,8 +12,8 @@
      2.我们手动 javac xx.java --->  xx.class
      3.java xx.class ---> 得到运行结果 编译报错或者执行成功
      4.javap xx.class 我们饭编译 得到一些字节码指令可以看 ....
-     其实在第3步时候  我们是JVM 将我们编译好的class文件加载到内存 并转化成本操作系统（Linux win mac）能识别的机器码执行得到结果
+     [其实在第3步时候 我们是JVM 将我们编译好的class文件加载到内存 并转化成本操作系统能识别的机器码并执行得到结果
      当然你也可以将编译好的class文件（字节码文件考到任何一台主机上面执行 java  xx.class） 
-     so that`s the complie once run anywhere u got it?
+     so that`s the complie once run anywhere u got it?]
      
 ![JVM00](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM00.jpg)
