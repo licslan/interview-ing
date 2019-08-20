@@ -32,9 +32,10 @@
      我们在代码中所写的类 常量 变量 方法都在内存中 其决定着我们程序运行是否健壮是否高效
      [classLoader]  [Runtime Data Area]  [Execution Engine]  [Native Interface]
      class Loader:依据特定格式 加载class文件到内存
-     Execution Engine ：对命令进行解析
+     Execution Engine:对命令进行解析
      Native Interface:融合不同开发语言的原生库为Java使用  Java执行性能并没有c c++高
      在一些执行性能较高的操作需要调用其他语言的原生库 比如c++ 就要使用Native Interface来调用 而不重复造轮子
-     在Native Method Stack中登记Native方法 在Execution Engine执行时加载Native库如Class.forName(),forName0()是Native方法
+     在Native Method Stack中登记Native方法 在Execution Engine
+     执行时加载Native库如Class.forName(),forName0()是Native方法
      Runtime Data Area:JVM内存空间结构模型 我们所写的程序最后都会被加载到这里之后才开始运行
 ![JVM01](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM01.jpg)     
