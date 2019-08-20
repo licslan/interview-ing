@@ -8,7 +8,7 @@
 #### 06.[CICD DEVOPS模块](https://www.licslan.com)
 #### 07.[大数据知识（spark storm flink kafka hbase hadoop）](https://www.licslan.com)
 #### 08.[机器学习](https://www.licslan.com)
-#### 09.[JVM / gc](https://www.licslan.com)
+#### 09.[JVM / GC](https://github.com/licslan/interview-ing/blob/master/JVM-GC.md)
 #### 10.[spring系列 springcloud dubbo](https://www.licslan.com)
 #### 11.[数据结构 算法](https://www.licslan.com)
 #### 12.[操作系统](https://www.licslan.com)
