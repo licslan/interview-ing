@@ -216,6 +216,8 @@
      7+之后方法区常量池被移动到Java堆中主要原因是先前字符串常量池存在永久代中，永久代内存有限
      如果频繁调用intern()在池里创建字符串对象会使得字符串常量池被挤爆从而引发OOM
 ![JVM12](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>
+![JVM15](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM15.jpg)<br>
+![JVM16](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM16.jpg)<br>
 #### 22.不同JDK版本之间常量池变化？
 #### LICSLAN回答:
      在近三个JDK版本（1.6、1.7、1.8）中， 运行时常量池（Runtime Constant Pool）的所处区域一直在
