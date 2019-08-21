@@ -143,7 +143,7 @@
 ![JVM08](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM08.jpg)<br>
 #### 15.谈谈Java内存模型局部变量表和操作数栈？
 #### LICSLAN回答:   
-     局部变量表：包含方法执行过程中的所有变量
+     局部变量表：包含方法执行过程中的所有变量 8大基本数据类型 对象引用 returnaddress
      操作数栈：入栈 出栈 复制 交换 产生消费变量  有点类似原生CPU寄存器 javap x.class 里面iload..         
 #### 16.递归为什么会引发java.lang.StackOverflowError？
 #### LICSLAN回答:   
@@ -211,4 +211,15 @@
 ![JVM11](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM11.jpg)<br>
 #### 21.不同JDK版本之间的intern()方法的区别JDK6vsJDK6+？
 #### LICSLAN回答:    
-     TODO
+     他们作用上的区别仅在JDK6中通过intern()方法仅仅会在字符串常量池里添加字符串对象而不像6+以后
+     版本那样非但能往池中添加字符串对象还能添加字符串在堆中的引用
+     7+之后方法区常量池被移动到Java堆中主要原因是先前字符串常量池存在永久代中，永久代内存有限
+     如果频繁调用intern()在池里创建字符串对象会使得字符串常量池被挤爆从而引发OOM
+![JVM12](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>
+#### 22.不同JDK版本之间常量池变化？
+#### LICSLAN回答:
+     在近三个JDK版本（1.6、1.7、1.8）中， 运行时常量池（Runtime Constant Pool）的所处区域一直在
+     不断的变化，在JDK1.6时它是方法区的一部分；1.7又把他放到了堆内存中；1.8之后出现了元空间，它又回
+     到了方法区。其实，这也说明了官方对“永久代”的优化从1.7就已经开始了。可以参考下图
+![JVM13](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>
+![JVM14](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>      
