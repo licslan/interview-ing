@@ -33,7 +33,8 @@
      	互斥锁的特性  synchronized
      		互斥性：即在同时间只允许一个线程持有某个对象锁，通过这种特性来实现多线程的协调机制，这样在
      				同一时间只有一个线程对需要同步的代码块（复合操作）进行访问。互斥性也称为操作的原子性。
-     		可见性：必须确保在锁被释放之前，对共享变量所做的修改，对于随后获得该锁的另一个线程是可见的		 （即在获得锁时应获得最新共享变量的值），否则另一个线程可能是在本地缓存的耨个副本上继续操作，从而引起不一致。
+     		可见性：必须确保在锁被释放之前，对共享变量所做的修改，对于随后获得该锁的另一个线程是可见的
+     		      （即在获得锁时应获得最新共享变量的值），否则另一个线程可能是在本地缓存的耨个副本上继续操作，从而引起不一致。
      		synchronized 锁的不是代码 锁的都是对象		恰当合理给对象上锁 
      
      	根据获取的锁的分类 ： 获取对象锁和获取类锁
@@ -49,11 +50,11 @@
      			3.若锁住的是同一个对象，一个线程在访问对象的同步方法时，另一个访问对象的同步方法的线程会被阻塞
      			4.若锁住的是同一个对象，一个线程在访问对象的同步代码块时，另一个访问对象同步方法的线程会被阻塞反之亦然
      			5.同一个类的不同对象的对象锁互不干扰
-     			6.类锁由于也是以中特许的对象锁，因此表现和上述的1234一致，而由于一个类只有一把对象锁，所以同一个的不同对象使用类锁将会是同步的
+     			6.类锁由于也是以中特许的对象锁，因此表现和上述的1234一致，而由于一个类只有一把对象锁，所以同一个的不同
+     			  对象使用类锁将会是同步的
      			7.类锁和对象锁互不干扰		
      
      
-     -------------------------------------------------------------------------------------------------------------------------------------------------
      sychronized 底层实现原理
      			对象在内存中的布局
      				A:对象头
@@ -83,7 +84,10 @@
      synchronized时非公平锁  永不公平
      
      
-     ReentrantLock 使用习惯时 ReentrantLock fairLock = new ReentrantLock(true)  try {lock.lock() // do something }catch(){}finally{lock.unlock}  相比synchronized可以像普通对象一样使用来提供各种便利的方法 进行精细的同步操作 甚至可以实现synchronized难以表达的用例
+     ReentrantLock 使用习惯时 ReentrantLock fairLock = new ReentrantLock(true)  
+     try {lock.lock() // do something }catch(){}finally{lock.unlock}  
+     相比synchronized可以像普通对象一样使用来提供各种便利的方法 进行精细的同步操作 
+     甚至可以实现synchronized难以表达的用例
      比如：判断是否有线程 或者某个特定线程 在排队等待获取锁
      	  带超时的获取锁的尝试
      	  感知有没有成功获取到锁
@@ -95,9 +99,10 @@
      4.ReentrantLock 可以灵活地实现多路通知
      5.机制：sync操作mark work   lock调用Unsafe类的park（） 方法
      
-     AQS:AbstractQueuedSynchronizer  队列同步器  Java并发用来构建锁或其他同步组件的基础框架，是JUC包的核心 一般是继承AQS
+     AQS:AbstractQueuedSynchronizer  队列同步器  Java并发用来构建锁或其他同步组件的基础框架，
+         是JUC包的核心 一般是继承AQS
      
-     ---------------------------------------------------------------------------------------------------------------------------------------------------
+     
      JMM  Java Memory Model 
      	什么是Java内存模型中happens-before？
      	Java内存模型是一种抽象的概念，并不真实存在 它描述的是一组规则或规范 通过这组规范定义了程序中的
@@ -144,56 +149,57 @@
      			通过插入内存屏障指令禁止在内存屏障前后的指令执行重排序优化	
      			强制刷出各种CPU的缓存数据 因此任何CPU上的线程都能读取到这些数据的最新版本
      
-     	CAS Compare and Swap 
-     	synchronized  ====>是悲观锁 始终假设会发生并发冲突 因此会屏蔽一切可能发生违反数据完整性的操作
-     	CAS  ====>乐观锁 首先假设不发发生并发冲突 只在提交操作时 检查是否违反数据完整性  如果提交失败 则会重试
-     
-     	一种高效实现线程安全性的方法
-     		支持原子更新操作 用于计数器 序列发生器等
-     		属于乐观锁机制 号称 lock-free
-     		CAS 操作失败时由开发者决定是继续尝试 还是执行别的操作
-     		CAS思想
-     			包含三个操作数 内存位置（V）===主内存的值    预期原值（A） 和新值（B）
-     
-     		CAS多数情况下对开发者来说是透明的
-     			juc的atomic包提供了常用的原子性数据类型以及；引用/数组等相关原子类型和更新操作工具
-     			是很多线程安全程序的首选
-     			Unsafe类虽提供CAS服务，但因能够操作任意内存地址读写而有隐患
-     			Java9以后 可以使用variable handle api 来代替unsafe
-     
-     			缺点：
-     				若循环时间长 则开销很大
-     				只能保证一个共享变量的原子操作
-     				ABA 问题  解决问题：AtomicStampedReference  
-     				如果出现ABA 问题 改原子同步互斥可能更高效  synchronized
-     -------------------------------------------------------------------------------------------------------------------------------
-     		线程池
-     			内部自带了好几种方法 直接使用就好了  
-     			Fork/Join 框架 
-     				把大任务分割成若干个小任务并行执行，最终汇总每个小任务结果后得到大任务结果的框架 类似Hadoop map reduce
-     				运用了工作窃取算法  work-stealing ：某个线程从其他队列里窃取任务来执行	
-     
-     			JUC 的三个Executor接口
-     				Executor：运行新任务的简单接口	 将任务提交和任务执行细节解耦
-     				ExecutorService：具备管理执行器和任务生命周期的方法，提交任务机制更完善 可以有返回值
-     				ScheduleedExecutorService:支持Future和定期执行任务
-     			ThreadPoolExecutor	
-     			ThreadPoolExecutor 的构造函数
-     				corePoolSize：核心线程数量
-     				maximumPoolSize:线程不够用时能够创建的最大线程数
-     				workQueue:任务等待队列
-     				keepAliveTime:抢占的顺序不一定 看运气
-     				threadFactory:创建新线程，Executors.defaultThreadFactotu()
-     				handler:线程池的饱和策略
-     					1.AbortPolicy:直接抛出异常，这是默认策略
-     					2.CallerRunsPolicy:用调用者所在的线程来执行任务
-     					3.DiscardOldestPolicy：丢弃队列中靠最前的任务，并执行当前的任务
-     					4.DiscardPolicy:直接丢弃任务
-     					可以实现RejectedExecutionHandler接口的自定义handler选择不同策略
-     
-     					如果运行的线程少于corePoolSize，则创建新线程来处理任务，即使线程中的其他线程时空闲的
-     					如果线程池中的线程数据大于等于corePoolSize且小于maximumPoolSize，则只有当workQueue
-     					满时才创建新的线程去处理任务
-     					如果设置的corePoolSize和maximumPoolSize相同，则创建的线程池的大小时固定的这时如果有新任务提交，
-     					若workQueue未满，则将请求放入workQueue中，等待有空闲的线程去workQueue中取任务并处理
-     					如果运行的线程数量大于等于maximumPoolSize，这时如果workQueue已经满了 则通过handler所指定的策略来处理任务
+    CAS Compare and Swap 
+    synchronized  ====>是悲观锁 始终假设会发生并发冲突 因此会屏蔽一切可能发生违反数据完整性的操作
+    CAS  ====>乐观锁 首先假设不发发生并发冲突 只在提交操作时 检查是否违反数据完整性  如果提交失败 则会重试
+ 
+    一种高效实现线程安全性的方法
+        支持原子更新操作 用于计数器 序列发生器等
+        属于乐观锁机制 号称 lock-free
+        CAS 操作失败时由开发者决定是继续尝试 还是执行别的操作
+        CAS思想
+            包含三个操作数 内存位置（V）===主内存的值    预期原值（A） 和新值（B）
+ 
+        CAS多数情况下对开发者来说是透明的
+            juc的atomic包提供了常用的原子性数据类型以及；引用/数组等相关原子类型和更新操作工具
+            是很多线程安全程序的首选
+            Unsafe类虽提供CAS服务，但因能够操作任意内存地址读写而有隐患
+            Java9以后 可以使用variable handle api 来代替unsafe
+ 
+            缺点：
+                若循环时间长 则开销很大
+                只能保证一个共享变量的原子操作
+                ABA 问题  解决问题：AtomicStampedReference  
+                如果出现ABA 问题 改原子同步互斥可能更高效  synchronized
+        
+        
+        线程池
+            内部自带了好几种方法 直接使用就好了  
+            Fork/Join 框架 
+                把大任务分割成若干个小任务并行执行，最终汇总每个小任务结果后得到大任务结果的框架 类似Hadoop map reduce
+                运用了工作窃取算法  work-stealing ：某个线程从其他队列里窃取任务来执行	
+ 
+            JUC 的三个Executor接口
+                Executor：运行新任务的简单接口	 将任务提交和任务执行细节解耦
+                ExecutorService：具备管理执行器和任务生命周期的方法，提交任务机制更完善 可以有返回值
+                ScheduleedExecutorService:支持Future和定期执行任务
+            ThreadPoolExecutor	
+            ThreadPoolExecutor 的构造函数
+                corePoolSize：核心线程数量
+                maximumPoolSize:线程不够用时能够创建的最大线程数
+                workQueue:任务等待队列
+                keepAliveTime:抢占的顺序不一定 看运气
+                threadFactory:创建新线程，Executors.defaultThreadFactotu()
+                handler:线程池的饱和策略
+                    1.AbortPolicy:直接抛出异常，这是默认策略
+                    2.CallerRunsPolicy:用调用者所在的线程来执行任务
+                    3.DiscardOldestPolicy：丢弃队列中靠最前的任务，并执行当前的任务
+                    4.DiscardPolicy:直接丢弃任务
+                    可以实现RejectedExecutionHandler接口的自定义handler选择不同策略
+ 
+                    如果运行的线程少于corePoolSize，则创建新线程来处理任务，即使线程中的其他线程时空闲的
+                    如果线程池中的线程数据大于等于corePoolSize且小于maximumPoolSize，则只有当workQueue
+                    满时才创建新的线程去处理任务
+                    如果设置的corePoolSize和maximumPoolSize相同，则创建的线程池的大小时固定的这时如果有新任务提交，
+                    若workQueue未满，则将请求放入workQueue中，等待有空闲的线程去workQueue中取任务并处理
+                    如果运行的线程数量大于等于maximumPoolSize，这时如果workQueue已经满了 则通过handler所指定的策略来处理任务
