@@ -125,24 +125,90 @@
             Java方法执行的内存模型 
             包含多个栈帧（局部变量表 操作数栈 动态链接 返回地址...）
      本地方法栈：
-            TODO    
+            本地方法栈与Java虚拟机栈非常类似主要作用与标注了native方法 如forName0()  
      MetaSpace:
-            TODO             
+            元空间在jdk8之后开始把类的元数据放在本地堆内存中这一块区域叫做MetaSpace该区域在jdk7及以前时属于
+            永久代的。元空间和永久代都是存储class相关信息的包括class对象的method filed  实际上元空间和永久
+            代都是方法区的实现 只是实现有所不同 所以说方法区是JVM的一种规范 在jdk7原先位于方法区的常量池已被
+            移动到Java堆中并且在jdk8后使用元空间替代了永久代 该替代并非名字上面替代 2者最大的区别是元空间使用
+            的是本地内存 永久代使用的是jvm内存            
      Java堆:
-            TODO               
-![JVM02](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM02.jpg)     
-![JVM03](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM03.jpg)
-![JVM04](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM04.jpg)  
+            所有线程共享的堆对象实例分配的区域内存分配中最大的一块
+            GC管理的主要区域 一般使用分代回收算法
+                           
+![JVM02](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM02.jpg)<br>     
+![JVM03](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM03.jpg)<br>
+![JVM04](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM04.jpg)<br>
+![JVM07](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM07.jpg)<br>
+![JVM08](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM08.jpg)<br>
 #### 15.谈谈Java内存模型局部变量表和操作数栈？
 #### LICSLAN回答:   
      局部变量表：包含方法执行过程中的所有变量
      操作数栈：入栈 出栈 复制 交换 产生消费变量  有点类似原生CPU寄存器 javap x.class 里面iload..         
- #### 16.递归为什么会引发java.lang.StackOverflowError？
- #### LICSLAN回答:   
-      递归过深栈帧超出虚拟机深度 虚拟机深度时固定的 解决该问题的话 限制递归次数 或使用循环代替递归
-      虚拟机栈过多也会引发OOM异常  当虚拟机动态扩展时如果无法生气足够多的内存 就会OOM
-      栈类似集合有固定容量里面包含多个栈帧，在编写代码时每调用一个方法，Java虚拟机在内存中就会自动分配
-      一块对应的空间（栈帧）当方法执行完成后对应的栈帧会自动释放掉 所有栈不需要GC 
-      JSTCK分析线程卡顿运行情况
-![JVM05](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM05.jpg)  
-![JVM06](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM06.jpg)    
+#### 16.递归为什么会引发java.lang.StackOverflowError？
+#### LICSLAN回答:   
+     递归过深栈帧超出虚拟机深度 虚拟机深度时固定的 解决该问题的话 限制递归次数 或使用循环代替递归
+     虚拟机栈过多也会引发OOM异常  当虚拟机动态扩展时如果无法生气足够多的内存 就会OOM
+     栈类似集合有固定容量里面包含多个栈帧，在编写代码时每调用一个方法，Java虚拟机在内存中就会自动分配
+     一块对应的空间（栈帧）当方法执行完成后对应的栈帧会自动释放掉 所有栈不需要GC 
+     JSTCK分析线程卡顿运行情况
+![JVM05](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM05.jpg)<br>
+![JVM06](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM06.jpg)<br> 
+ 
+#### 17.MetaSpace元空间和永久代的区别？
+#### LICSLAN回答: 
+      元空间在jdk8之后开始把类的元数据放在本地堆内存中这一块区域叫做MetaSpace该区域在jdk7及以前时属于
+      永久代的。元空间和永久代都是存储class相关信息的包括class对象的method filed  实际上元空间和永久
+      代都是方法区的实现 只是实现有所不同 所以说方法区是JVM的一种规范 在jdk7原先位于方法区的常量池已被
+      移动到Java堆中并且在jdk8后使用元空间替代了永久代 该替代并非名字上面替代 2者最大的区别是元空间使用
+      的是本地内存 永久代使用的是jvm内存 那么使用本地内存有什么好处呢？
+      java.lang.OutOfMemoryError:PermGen Space 不会出现了 因为默认类的元数据分配只受本地内存大小限制
+      理论上本地内存剩余多少meta space就能有多大
+      MetaSpace 相比 PermGend 优势
+      字符串常量池存在永久代中 容易出现性能问题和内存溢出
+      类的方法信息大小难以确定 给永久代的大小指定带来困难
+      永久代会给GC带来不必要的复杂度 且回收效率偏低
+      方便HotSpot与其他JVM 如Jrockit 的集成  
+#### 18.JVM三大性能调优参数-Xms -Xmx -Xss含义是？
+#### LICSLAN回答:    
+     比如 java -Xms 128m -Xmx 128m -Xss 256k -jar licslan.jar
+     -Xss：规定了每个线程虚拟机栈的大小 此配置将影响此进程中的并发线程数的大小
+     -Xms：堆的初始值 该进程刚创建时 专属Java堆大小 一旦超过初始值 Java堆将会自动扩容    
+     -Xmx：堆能达到的最大值
+     通常情况下 将-Xms和-Xmx设置为一样大 当k不够用扩容会内存抖动影响程序稳定
+#### 19.Java内存模型中堆和栈的区别  内存分配策略？
+#### LICSLAN回答:    
+     程序运行时 有3中内存分配策略 静态 栈式 堆式 
+     静态存储：编译时确定每个数据目标在运行时的存储空间需求 不允许有嵌套递归的结构存在 
+     栈式存储：数据区需求在编译时未知 运行时模块入口前确定
+     堆时存储：编译时或运行时模块入口都都无法确定 动态分配 可变长度串 可变实例
+     联系：引用对象，数组时 栈里面定义变量保存堆中目标的首地址
+     创建好的对象实例和数组都会保存在堆中想要引用堆中的某个对象或者数组可以在栈中定义一个
+     特殊的变量，将栈中的变量的取值等于数组或者对象在堆内存中的首地址，栈中的这个变量就成了
+     数组或对象的引用变量，以后就可以使用在栈中的引用变量来访问堆中的数组或者对象了 引用变量就
+     像是为数组或者对象的起的一个名称 引用变量是普通的变量定义时在栈中分配引用变量在程序运行到其
+     作用域之外后就会被释放掉了而数组和对象本身在堆中分配即使程序运行到使用new 产生数组或者对象
+     的语句所在的代码块之外，数组和对象本身占据的内存不会被释放他们在没有引用变量指向的时候才会变
+     为垃圾 需要等待后面不确定时间被垃圾回收器GC释放掉
+     所以区别主要在以下几个方面：
+     管理方式：栈自动释放内存 堆需要GC回收释放
+     空间大小：栈比堆小
+     碎片想关：栈产生的碎片远远小于堆 垃圾回收堆不是实时所以容易不连续 产生碎片较多较大
+     分配方式：栈支持静态和动态分配 而仅仅支持动态分配 
+     效率：栈的效率比堆高 栈相对来说灵活度不够 就是入栈出栈 堆双向链表 动态分配复杂灵活效率低
+     
+![JVM09](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM09.jpg)<br> 
+#### 20.简单看一段代码 （下面的第一幅图）说说元空间，堆，线程独占部分是一些什么？
+#### LICSLAN回答: 
+     产生的结果看下面的第二幅图
+     元空间：一些class基本信息 如方法 成员变量
+     堆内存：当HelloWorld被创建时 就会存在2个对象实例 Object：HelloWorld & Object：String("test")
+     线程独占：当程序执行时 main 线程会分配对于的虚拟机栈 本地栈 程序计数器 栈里面会存有
+              Parameter reference :"test" to String Object
+              Variable reference: "hw" to HelloWorld Object
+              Local Variables: a with 1,lineNo 
+![JVM10](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM10.jpg)<br>
+![JVM11](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM11.jpg)<br>
+#### 21.不同JDK版本之间的intern()方法的区别JDK6vsJDK6+？
+#### LICSLAN回答:    
+     TODO
