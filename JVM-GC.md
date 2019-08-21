@@ -43,3 +43,65 @@
 #### LICSLAN回答: 
      JAVA反射机制是在运行状态中，对任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的
      任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制
+#### 06.类从编译到执行的过程？
+#### LICSLAN回答: 
+     1.编译器将licslan.java源文件编译为licslan.class字节码文件  byte形式传进来
+     2.ClassLoader将字节码装换为JVM中的Class<licslan>对象
+     3.JVM利用Class<licslan>对象实例化为licslan对象
+#### 07.谈谈什么是classloader？
+#### LICSLAN回答: 
+     [ClassLoader在Java中有着非常重要的作用 它主要工作在Class装载过程的加载阶段 其主要作用是
+     从外部系统获取Class二进制数据流 它是Java的核心组件 所有的Class都由ClassLoader进行加载的
+     ClassLoader负责将Class文件里面的二进制数据流装载到系统，然后交给Java虚拟机链接，初始化]
+#### 08.谈谈classloader种类？
+#### LICSLAN回答: 
+     [classloader中有个重要方法 loadeClass（）  进去发现里面有个prent !!!]
+     1.BootstrtpClassLoader: c++编写，加载核心库java.*  如java.lang包下面的 用户不可见
+        navtive修饰的方法如果要看的话 可以去openjdk代码去查看  有的是c/c++实现
+     2.ExtClassLoader: Java编写 加载扩展库javax.* 用户可以自定义jar放到Ext目录下自定义加载
+     3.AppClassLoader: Java编写 加载程序所在目录 用户可见 加载classpath下面的内容 类路径
+     4.自定义ClassLoader：Java编写 定制化加载 可能不在classpath下面 或者不是class/jar文件
+       自定义classLoader实现需要覆盖2个函数
+       findClass(String name)  寻找class文件 怎么去读二进制流
+       defineClass(byte[],b,off,len,null)  定义这么一个类 返回class
+       自定义classLoader应用有很多 比如对敏感class加密  字节码增强技术  AOP实现也能借鉴该方式
+#### 09.谈谈类加载器的双亲委派机制吧？
+#### LICSLAN回答: 
+     [
+     不同classloader相互共存各司其职加载各自管理的区域  检查.class字节码并加载字节码
+     1.从低向上检查类是否已经加载过
+       08.4-->08.3-->08.2-->08.1 到各自检查该类是否有被加载过 没有就委派上面的面的人去检查
+     2.从顶向下尝试加载类   
+       08.1-->08.2-->08.3-->08.4 到各自管理的目录区域去找是否有该类并加载没有就委派下面的人去加载
+     ]
+#### 10.谈谈类加载器为什么要使用双亲委派机制呢？
+#### LICSLAN回答: 
+     1.避免多份同样字节码的加载 内存很宝贵 
+       没有必要保存相同的类对象 class对象 byte字节码 并非new 的实例对象            
+#### 11.谈谈Java类加载方式？
+#### LICSLAN回答: 
+     A.隐式加载：new  构造函数初始化
+     B.显式加载：loadClass forName 等    
+#### 12.谈谈Java类加载loadClass forName区别？
+#### LICSLAN回答: 
+     A.二者都满足反射机制 可以获取对任意一个类/对象的方法和属性
+     B.类的装载过程
+        1）加载：通过ClassLoader加载class字节码文件，生成class对象
+        2）链接
+            （1）校验：检查加载的class的正确性和安全性
+            （2）准备：为类变量(static)分配存储空间并设置类变量初始值，类变量存在方法区中生命周期长，注意内存泄漏
+            （3）解析：JVM将常量池内的符号引用转换为直接引用       
+        3）初始化：执行类变量赋值和静态代码块   
+     C.点到代码里面去看  Class.forName("全路径类名") & 类名.class.getClassLoader()
+       Class.forName得到的class是已经初始化完成的  finshed B.2).(3)
+       Classloader.loadClass得到的class是还没有链接的  finshed B.1) 
+       这个时候就知道2者的区别了吧  ops~~~   
+#### 13.既然知道了Java类加载loadClass forName区别，那么这样做有什么作用吗，举个例子？
+#### LICSLAN回答:   
+     A.比如数据库链接驱动Class.forName("com.mysql.jdbc.driver")其实driver里面有静态代码段可以生成对象使用
+     B.spring IOC资源加载器获取独立的资源的时候读取bean配置的时候，之所以这样是和ioc lazy加载有关 可以
+       加快初始化速度 spring IOC 就大量使用了延时加载技术 就是用了classLoader  不需要初始化 把类的加载工作留到
+       实际使用到这个类的时候再去加载
+     C.所以看来2者在使用上都很有意义  
+#### 14.谈谈Java内存模型吧？
+#### LICSLAN回答:          
