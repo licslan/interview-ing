@@ -13,7 +13,7 @@
 #### 11.[数据结构 算法](https://www.licslan.com)
 #### 12.[操作系统](https://www.licslan.com)
 #### 13.[设计模式](https://www.licslan.com)
-#### 14.[Java 多线程编程模块](https://www.licslan.com)
+#### 14.[Java 多线程编程模块](https://github.com/licslan/interview-ing/blob/master/MULTI-THREAD.md)
 #### 15.[Linux 操作命令](https://www.licslan.com)
 #### 16.[分布式事务模块](https://www.licslan.com)
 #### 17.[中间件 MQ](https://www.licslan.com)
