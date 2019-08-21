@@ -30,7 +30,8 @@
      			标记-清除算法（Mark and Sweep）=======适合老年代垃圾回收(存活率高的对象垃圾回收)
      				标记：从根集合进行扫描，对存活的对象进行标记
      				清除：对堆内存从头到尾进行线性遍历，回收不可达对象内存	
-     					碎片化  大量不连续的空间碎片 可能导致程序后面运行时要分配较大的对象时得不到连续内存空间 不得不触发垃圾回收
+     					 碎片化  大量不连续的空间碎片 可能导致程序后面运行时要分配较大的对象时得不到连续内存空间
+     					 不得不触发垃圾回收
      			复制算法  ====  适用于对象存活率低的场景  回收年轻代
      				分为对象面和空闲面
      				对象在对象面上创建	
@@ -41,7 +42,9 @@
      					适用于对象存活率低的场景
      			标记-整理算法  ====  适合老年代垃圾回收		
      				标记：从根集合进行扫描，对存活的对象进行标记
-     				清除：移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收   标记-整理算法在标记-清除算法基础上又进行了对象的移动，因此成本更高，但是却解决内存碎片化的问题 
+     				清除：移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收
+     				     标记-整理算法在标记-清除算法基础上又进行了对象的移动，
+     				     因此成本更高，但是却解决内存碎片化的问题 
      				避免内存的不连续行
      				不用设置两块内存互换
      				适用于存活率高的场景
@@ -75,8 +78,10 @@
      					Full GC 比 Minor GC慢 一般慢10倍以上 但执行频率低
      					触发Full GC 的条件
      						1.老年代空间不足
-     						2.永久代空间不足（jdk6/7） jdk8用元空间替代永久代 为了减低Full GC的频率 减少GC 的负担
-     						3.CMS GC 时注意是否出现 promotion failed   （Major GC）， concurrent mode failure  CMS
+     						2.永久代空间不足（jdk6/7） jdk8用元空间替代永久代 为了减低Full 
+     						  GC的频率 减少GC 的负担
+     						3.CMS GC 时注意是否出现 promotion failed   （Major GC）， 
+     						  concurrent mode failure  CMS
      						4.Major GC 晋升到老年代的平均大小大于老年代的剩余空间
      						5.调用System.gc()
      						6.使用RMI 来进行RPC或者管理JDK应用，每小时执行一次Full GC
@@ -149,14 +154,16 @@
      						只用当内存空间不足时，GC会回收该引用的对象的内存
      						可以用来实现高速缓存	
      						String str = new String ("abc");//强引用
-     						SoftReference<String> softRef = new SoftReference<String>(str);//软引用  可以配合引用队列使用
+     						SoftReference<String> softRef = new SoftReference<String>(str);//软引用
+     						可以配合引用队列使用
      					弱引用 	Weak Reference
      						非必须的对象，比较软引用更弱一些
      						GC时会被回收
      						被回收的概率也不大，因为GC线程优先级比较低
      						适用于引用偶尔被使用且不影响垃圾收集的对象
      						String str = new String ("abc");//强引用
-     						WeakReference<String> weaktRef = new WeakReference<String>(str);//弱引用  可以配合引用队列使用
+     						WeakReference<String> weaktRef = new WeakReference<String>(str);//弱引用
+     						可以配合引用队列使用
      					虚引用 PhantomReference
      						不会决定对象的生命周期	
      						任何时候都可能被垃圾收集器回收
