@@ -144,3 +144,5 @@
       栈类似集合有固定容量里面包含多个栈帧，在编写代码时每调用一个方法，Java虚拟机在内存中就会自动分配
       一块对应的空间（栈帧）当方法执行完成后对应的栈帧会自动释放掉 所有栈不需要GC 
       JSTCK分析线程卡顿运行情况
+![JVM05](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM05.jpg)  
+![JVM06](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM06.jpg)    
