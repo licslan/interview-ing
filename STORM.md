@@ -19,3 +19,9 @@
      topology consumes streams of data and processes those streams in arbitrarily complex ways, 
      repartitioning the streams between each stage of the computation however needed. Read more in the 
      tutorial.
+     Storm 是一个免费并开源的分布式实时计算系统。利用 Storm 可以很容易做到可靠地处理无限的
+     数据流，像 Hadoop 批量处理大数据一样，Storm 可以实时处理数据
+ #### 2.STORM集群架构？
+ #### LICSLAN回答
+ ![STORM01](https://github.com/licslan/interview-ing/raw/master/STORM/STORM01.jpg)
+       
