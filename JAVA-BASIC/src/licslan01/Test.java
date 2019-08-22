@@ -42,6 +42,20 @@ public class Test {
          * 我是无参构造函数 1
          * */
 
+        /* javac编译后  java licslan01.Test 执行字节码  JVM 会将Test.class  byte字节load到JVM中解析解释执行为改平台能识别的机器码
+         * C:\Users\licsl\Desktop\JVM-GC\interview-ing\JAVA-BASIC\src>java licslan01.Test
+         * i am static code block
+         * i am static code block again
+         * ~~~~~~~~~~~~~~~~~~~~~~~~~~创建一个对象
+         * i am Construct code block
+         * i am Construct code block again
+         * 我是无参构造函数
+         * ~~~~~~~~~~~~~~~~~~~~~~~~~~创建第二对象
+         * i am Construct code block
+         * i am Construct code block again
+         * 我是无参构造函数
+         * */
+
         //执行顺序没有调用有参构造函数：静态代码块>构造代码块>构造函数（无参）
         //执行顺序如果调用有参构造函数：静态代码块>构造代码块>构造函数（有参）
 
