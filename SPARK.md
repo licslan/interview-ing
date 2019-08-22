@@ -157,7 +157,15 @@
      窄依赖：父RDD的每个分区都只被子RDD的一个分区使用  
             例如map、filter、union等操作会产生窄依赖       
 ![SPARK07](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK07.jpg)     
-      
+#### 10.谈谈spark 常用的算子有哪些吧？
+#### LICSLAN回答
+     转换（Transformation）：Transformation操作是延迟计算的，也就是说从一个RDD转
+     换生成另一个 RDD 的转换操作不是马上执行，需要等到有 Action 操作的时候才会真正触
+     发运算
+![SPARK08](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK08.jpg)      
+     
+     行动（Action）：Action 算子会触发 Spark 提交作业（Job），并将数据输出 Spark 系统。
+![SPARK09](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK09.jpg)          
      
      
      
