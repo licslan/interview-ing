@@ -145,7 +145,19 @@
      E.SparkContext构建成DAG图，将DAG图分解成stage，将Taskset发送给Task Scheduler,最后由Task
        Scheduler 将Task发送给Executor运行
      F.Task在Executor上运行，运行完释放所有资源   
-![SPARK05](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK05.jpg)      
+![SPARK05](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK05.jpg)
+#### 8.谈谈spark RDD流程吧？
+#### LICSLAN回答
+![SPARK06](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK06.jpg)
+
+#### 9.谈谈spark RDD宽依赖和窄依赖吧？
+#### LICSLAN回答
+     宽依赖：父RDD的分区被子RDD的多个分区使用 例如 groupByKey、reduceByKey、
+            sortByKey等操作会产生宽依赖，会产生shuffle
+     窄依赖：父RDD的每个分区都只被子RDD的一个分区使用  
+            例如map、filter、union等操作会产生窄依赖       
+![SPARK07](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK07.jpg)     
+      
      
      
      
