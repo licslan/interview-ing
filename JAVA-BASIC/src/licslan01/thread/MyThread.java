@@ -122,13 +122,13 @@ public class MyThread {
         }
         //关闭线程池
         pool.shutdown();
+        //遍历获取到的返回值
         for (Future<String> aFutureList : futureList) {
             try {
                 System.out.println("the result is " + aFutureList.get());
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
