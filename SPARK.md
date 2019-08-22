@@ -129,7 +129,23 @@
      
      Spark应用程序从编写到提交，执行，输出的整个过程如图所示，描述如下：
 ![SPARK03](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK03.jpg)     
-      
+#### 6.谈谈spark 计算模型吧？
+#### LICSLAN回答
+     RDD可以看作是对各种数据计算模型的统一抽象，spark的计算过程主要是RDD的迭代计算过程。RDD的迭代
+     计算过程非常类似于管道。分区数量取决于partition数量的设定，每个分区的数量只会在一个Task中计算
+     所有分区可以在多个机器节点的Executors上并行执行   
+![SPARK04](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK04.jpg) 
+#### 7.谈谈spark 运行流程吧？
+#### LICSLAN回答
+     A.构建spark application的运行环境 启动sparkcontext
+     B.sparkcontext向资源管理器（Standalone,Mesos,Yarn,k8s..）申请运行Executor资源，并启动
+       Standalone Executor 后台服务
+     C.Executor向SparkContext申请Task
+     D.SparkContext将应用程序分发给Executor
+     E.SparkContext构建成DAG图，将DAG图分解成stage，将Taskset发送给Task Scheduler,最后由Task
+       Scheduler 将Task发送给Executor运行
+     F.Task在Executor上运行，运行完释放所有资源   
+![SPARK05](https://github.com/licslan/interview-ing/raw/master/SPARK/SPARK05.jpg)      
      
      
      
