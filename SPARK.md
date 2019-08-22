@@ -22,7 +22,8 @@
      Spark runs a function in parallel as a set of tasks on different nodes, it [ships a copy of each variable] used 
      in the function to [each task]. Sometimes, a variable needs to be shared across tasks, or between tasks and the 
      driver program. Spark supports two types of shared variables: [broadcast variables], which can be used to cache 
-     a value in memory on all nodes, [and accumulators], which are variables that are only “added” to, such as counters and sums.
+     a value in memory on all nodes, [and accumulators], which are variables that are only “added” to, such as 
+     counters and sums.
      
      RDD有5个很重要的概念在代码里面有体现。大家可以关注源码RDD.scala
      https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/rdd/RDD.scala 
@@ -54,20 +55,22 @@
 #### LICSLAN回答：
      spark里面主要有2种类型的算子 一种是  transformation 算子(LAZY)  一种是 action 算子
      来看看官网怎么描述的吧  重要关键字用[]包起来了
-     RDDs support two types of operations: [transformations], which create a new dataset from an existing one, and [actions], 
-     which return a value to the [driver program] after running a computation on the dataset. For example, map is a transformation
-     that passes each dataset element through a function and returns a new RDD representing the results. On the other hand, 
-     reduce is an action that aggregates all the elements of the RDD using some function and returns the final result to the 
-     driver program (although there is also a parallel reduceByKey that returns a distributed dataset).
+     RDDs support two types of operations: [transformations], which create a new dataset from an existing one, and 
+     [actions], which return a value to the [driver program] after running a computation on the dataset. For example, 
+     map is a transformation that passes each dataset element through a function and returns a new RDD representing the 
+     results. On the other hand, reduce is an action that aggregates all the elements of the RDD using some function 
+     and returns the final result to the driver program (although there is also a parallel reduceByKey that returns a 
+     distributed dataset).
      
-     All transformations in Spark are [lazy], in that they do not compute their results right away. Instead, they just remember 
-     the transformations applied to some base dataset (e.g. a file). [The transformations are only computed when an action requires 
-     a result to be returned to the driver program]. This design enables Spark to run more efficiently. For example, we can realize 
-     that a dataset created through map will be used in a reduce and return only the result of the reduce to the driver, rather 
-     than the larger mapped dataset.
+     All transformations in Spark are [lazy], in that they do not compute their results right away. Instead, they just 
+     remember the transformations applied to some base dataset (e.g. a file). [The transformations are only computed 
+     when an action requires a result to be returned to the driver program]. This design enables Spark to run more 
+     efficiently. For example, we can realize that a dataset created through map will be used in a reduce and return 
+     only the result of the reduce to the driver, rather than the larger mapped dataset.
      
-     By default, each transformed RDD may be recomputed each time you run an action on it. However, you may also [persist] an RDD 
-     in memory using the persist (or cache) method, in which case Spark will keep the elements around on the cluster for much faster 
-     access the next time you query it. There is also support for persisting RDDs on disk, or replicated across multiple nodes.	  
+     By default, each transformed RDD may be recomputed each time you run an action on it. However, you may also 
+     [persist] an RDD in memory using the persist (or cache) method, in which case Spark will keep the elements around 
+     on the cluster for much faster access the next time you query it. There is also support for persisting RDDs on 
+     disk, or replicated across multiple nodes.	  
  
                               
