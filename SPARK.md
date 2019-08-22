@@ -15,8 +15,8 @@
      distributed dataset (RDD), which is a [collection of elements partitioned] across the nodes of the cluster 
      that can be operated on in parallel. RDDs are [created by] starting with a file in the Hadoop file system 
      (or any other Hadoop-supported file system), or an existing Scala collection in the driver program, and 
-     [transforming] it. Users may also ask Spark to [persist an RDD in memory], allowing it to be reused efficiently 
-     across parallel operations. Finally, RDDs [automatically recover] from node failures.
+     [transforming] it. Users may also ask Spark to [persist an RDD in memory], allowing it to be reused 
+     efficiently across parallel operations. Finally, RDDs [automatically recover] from node failures.
      
      [A second abstraction] in Spark is [shared variables] that can be used in parallel operations. By default, when 
      Spark runs a function in parallel as a set of tasks on different nodes, it [ships a copy of each variable] used 
@@ -46,7 +46,7 @@
       	 可选特性  这个是对应key-value格式的RDD使用并非所有RDD都具有  分区的key-value
       	 对应源码：@transient val partitioner: Option[Partitioner] = None
      
-      5  - Optionally, a list of preferred locations to compute each split on (e.g. block locations for an HDFS file)
+      5  - Optionally, a list of preferred locations to compute each split on(e.g. block locations - HDFS file)
       	 数据在哪优先把作业调度到数据所在的节点进行计算：移动数据不如移动计算
       	 所以计算spilt的时候选择最佳位置来计算
       	 为什么会有多个位置呢？ locations  location有s?
@@ -57,10 +57,10 @@
      来看看官网怎么描述的吧  重要关键字用[]包起来了
      RDDs support two types of operations: [transformations], which create a new dataset from an existing one, and 
      [actions], which return a value to the [driver program] after running a computation on the dataset. For example, 
-     map is a transformation that passes each dataset element through a function and returns a new RDD representing the 
-     results. On the other hand, reduce is an action that aggregates all the elements of the RDD using some function 
-     and returns the final result to the driver program (although there is also a parallel reduceByKey that returns a 
-     distributed dataset).
+     map is a transformation that passes each dataset element through a function and returns a new RDD representing 
+     the results. On the other hand, reduce is an action that aggregates all the elements of the RDD using some 
+     function and returns the final result to the driver program (although there is also a parallel reduceByKey that
+     returns a distributed dataset).
      
      All transformations in Spark are [lazy], in that they do not compute their results right away. Instead, they just 
      remember the transformations applied to some base dataset (e.g. a file). [The transformations are only computed 
@@ -69,8 +69,8 @@
      only the result of the reduce to the driver, rather than the larger mapped dataset.
      
      By default, each transformed RDD may be recomputed each time you run an action on it. However, you may also 
-     [persist] an RDD in memory using the persist (or cache) method, in which case Spark will keep the elements around 
-     on the cluster for much faster access the next time you query it. There is also support for persisting RDDs on 
-     disk, or replicated across multiple nodes.	  
+     [persist] an RDD in memory using the persist (or cache) method, in which case Spark will keep the elements 
+     around on the cluster for much faster access the next time you query it. There is also support for persisting
+     RDDs on disk, or replicated across multiple nodes.	  
  
                               
