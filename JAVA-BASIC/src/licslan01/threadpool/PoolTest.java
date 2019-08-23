@@ -1,4 +1,4 @@
-package licslan01.Threadpool;
+package licslan01.threadpool;
 /**
  * @author LICSLAN
  * */
