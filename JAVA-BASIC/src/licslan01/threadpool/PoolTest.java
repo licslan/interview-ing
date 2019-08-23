@@ -1,9 +1,11 @@
 package licslan01.threadpool;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.Executors.*;
-import static java.util.concurrent.ThreadPoolExecutor.defaultHandler;
 
 /**
  * @author LICSLAN
