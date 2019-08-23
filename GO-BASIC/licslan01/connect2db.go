@@ -1,4 +1,4 @@
-package GO_BASIC
+package main
 
 /**
 go 语言对MySQL CRUD
