@@ -28,5 +28,8 @@
 #### 26.[Kafka学习](https://www.licslan.com) TODO
 #### 27.[ES学习](https://www.licslan.com) TODO
 #### 28.[爬虫技术学习](https://www.licslan.com) TODO
-#### 29.[欢迎大家一起补充](https://www.baidu.com) Expecting ^_^
+#### 29.[JavaScript技术学习](https://www.licslan.com) TODO
+#### 30.[Vue技术学习](https://www.licslan.com) TODO
+#### 31.[Flutter技术学习](https://www.licslan.com) TODO
+#### 32.[欢迎大家一起补充](https://www.baidu.com) Expecting ^_^
 
