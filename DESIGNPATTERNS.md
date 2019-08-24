@@ -26,9 +26,10 @@
      设计模式已经经历了很长一段时间的发展，它们提供了软件开发过程中面临的一般问题的最佳解决方案。学习这些模式有助于经验不足
      的开发人员通过一种简单快捷的方式来学习软件设计。
 #### 设计模式的类型
-     根据设计模式的参考书 Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 
-     可复用的面向对象软件元素） 中所提到的，总共有 23 种设计模式。这些模式可以分为三大类：创建型模式（Creational Patterns）
-     、结构型模式（Structural Patterns）、行为型模式（Behavioral Patterns）。当然，我们还会讨论另一类设计模式：J2EE 设计模式。
+     根据设计模式的参考书 Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 
+     - 可复用的面向对象软件元素） 中所提到的，总共有 23 种设计模式。这些模式可以分为三大类：创建型模式（Creational 
+     Patterns）、结构型模式（Structural Patterns）、行为型模式（Behavioral Patterns）。当然，我们还会讨论另一
+     类设计模式：J2EE 设计模式。
      
      序号	模式 & 描述	包括
      1	创建型模式
@@ -73,7 +74,7 @@
      拦截过滤器模式（Intercepting Filter Pattern）
      服务定位器模式（Service Locator Pattern）
      传输对象模式（Transfer Object Pattern） 
-![SPARK00](https://github.com/licslan/interview-ing/raw/master/DESIGNPATTERNS/the-relationship-between-design-patterns.jpg)
+![DESIGNPATTERNS00](https://github.com/licslan/interview-ing/raw/master/DESIGNPATTERNS/the-relationship-between-design-patterns.jpg)
 #### 设计模式的六大原则
      1、开闭原则（Open Close Principle）
      
