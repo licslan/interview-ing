@@ -31,5 +31,6 @@
 #### 29.[JavaScript技术学习](https://www.licslan.com) TODO
 #### 30.[Vue技术学习](https://www.licslan.com) TODO
 #### 31.[Flutter技术学习](https://www.licslan.com) TODO
-#### 32.[欢迎大家一起补充](https://www.baidu.com) Expecting ^_^
+#### 32.[设计模式学习](https://github.com/licslan/interview-ing/blob/master/DESIGNPATTERNS.md) 进行中...
+#### 33.[欢迎大家一起补充](https://www.baidu.com) Expecting ^_^
 
