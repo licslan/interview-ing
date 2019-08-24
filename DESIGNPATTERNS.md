@@ -104,4 +104,6 @@
      
      6、合成复用原则（Composite Reuse Principle）
      
-     合成复用原则是指：尽量使用合成/聚合的方式，而不是使用继承。         
+     合成复用原则是指：尽量使用合成/聚合的方式，而不是使用继承。   
+     
+#### [内容参考菜鸟教程](https://www.runoob.com/design-pattern)           
