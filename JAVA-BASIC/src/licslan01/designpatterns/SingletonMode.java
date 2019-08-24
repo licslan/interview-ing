@@ -68,7 +68,7 @@ class SingletonMode {
 class PlayTest{
 
     public static void main(String[] args) {
-        //SingletonMode singletonMode = new SingletonMo()  private 不可实例化
+        //SingletonMode singletonMode = new SingletonMode()  private 不可实例化
         //只有通过SingletonMode获取
         SingletonMode instance = SingletonMode.getInstance();
         instance.message();
