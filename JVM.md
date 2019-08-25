@@ -225,7 +225,7 @@
      到了方法区。其实，这也说明了官方对“永久代”的优化从1.7就已经开始了。可以参考下图
 ![JVM13](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>
 ![JVM14](https://github.com/licslan/interview-ing/raw/master/JVM-GC/JVM12.jpg)<br>   
-#### 23.java 8大基本数据类型于包装类型异同？
+#### 23.java 8大基本数据类型 VS 包装类型异同？
 #### LICSLAN回答
      java有八种基本数据类型分别是，char、shoat、int、float、double、long、byte、boolean。
      而它们对应的包装类也有，Character、Shoat、Integer、Float、Double、Long、Byte、Boolean。
