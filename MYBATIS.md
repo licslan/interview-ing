@@ -8,8 +8,9 @@
      等其他人... so 也 喜欢一个人  暂时而已。
      好的 言归正传~~~~ ^_^
      Mybatis是支持定制化SQL、存储过程和高级映射的持久层框架。主要完成两件事：
-     {封装JDBC的操作}
-     {利用反射(反射可以了解之前写的内容)完成Java类和SQL之间的转换}
+     
+     A.封装JDBC的操作
+     B.利用反射(反射可以了解之前写的内容)完成Java类和SQL之间的转换
      
      
      mybatis的主要目的就是管理执行SQL是参数的输入和输出，编写SQL和结果集的映射是mybatis的主要优点
@@ -24,3 +25,14 @@
      MappedStatement：代表一个select|update|insert|delete元素
      SqlSource：根据传入的ParamterObject生成SQL
      BoundSql：包含SQL和参数信息
+     
+     学习Mybatis 主要看上面的A,B 2项怎么实现
+     首先来看看SqlSessionFactory和SqlSession源码
+     SqlSessionFactory的创建是mybatis的第一步，SqlSession完成数据库增删改查。
+     我们先来看看二者的创建
+![MYBATIS00](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS00.jpg)
+     
+     首先创建SqlSessionFactoryBudiler对象，在调用builder方法读取mybatis配置文件，并创建SqlSessionFactory：
+
+![MYBATIS01](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS01.jpg)<br>
+![MYBATIS02](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS02.jpg)
