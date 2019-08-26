@@ -16,14 +16,20 @@ public class Test {
     //构造代码块2
     {System.out.println("i am Construct code block again");}
     public static void main(String[] args) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建一个对象");
-        Test test1 = new Test();
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建第二对象");
-        Test test2 = new Test();
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建第三对象");
-        Test test3 = new Test(1);
+            Integer i1 = 100;
+            Integer i2 = 100;
+            Integer i3 = 128;
+            Integer i4 = 128;
+            System.out.println(i1 == i2);
+            System.out.println(i3 == i4);
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建一个对象");
+//        Test test1 = new Test();
+//
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建第二对象");
+//        Test test2 = new Test();
+//
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~创建第三对象");
+//        Test test3 = new Test(1);
 
         /*
          * i am static code block
