@@ -27,6 +27,10 @@
      BoundSql：包含SQL和参数信息
      
      学习Mybatis 主要看上面的A,B 2项怎么实现
+![MYBATIS05](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS05.jpg)<br>
+![MYBATIS06](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS06.jpg)<br>
+![MYBATIS07](https://github.com/licslan/interview-ing/raw/master/MYBATIS/MYBATIS07.jpg)<br>     
+     
      首先来看看SqlSessionFactory和SqlSession源码
      SqlSessionFactory的创建是mybatis的第一步，SqlSession完成数据库增删改查。
      我们先来看看二者的创建
