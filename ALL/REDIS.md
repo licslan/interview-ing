@@ -67,3 +67,7 @@
      			5.整数集合
      			6.压缩列表
      			7.对象
+     			
+     			
+#### 关于redis常见面试题总结
+![redis常见面试题总结](https://www.cnblogs.com/jasontec/p/9699242.html)     			
