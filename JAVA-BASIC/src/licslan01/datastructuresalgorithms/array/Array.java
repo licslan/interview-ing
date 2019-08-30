@@ -119,7 +119,7 @@ public class Array {
     /**修改index下标的值*/
     public void setIndexRes(int index,int e){
         if(index<0||index>size) {
-            throw new IllegalArgumentException("Get failed index is illegal");
+            throw new IllegalArgumentException("Set failed index is illegal");
         }
         data[index]=e;
     }
@@ -146,10 +146,10 @@ public class Array {
     public int remove(int index){
 
         if(isEmpty()){
-            throw new IllegalArgumentException("the array is empty!");
+            throw new IllegalArgumentException("The array is empty!");
         }
         if(index<0||index>size) {
-            throw new IllegalArgumentException("Get failed index is illegal");
+            throw new IllegalArgumentException("Remove failed index is illegal");
         }
         int res = data[index];
         for(int i=index+1;i<size;i++ ){
@@ -191,6 +191,8 @@ public class Array {
         array.remove(2);
         System.out.println(array);
         array.removedata(200);
+        System.out.println(array);
+        array.removeFirst();
         System.out.println(array);
     }
 
